@@ -1,12 +1,14 @@
 import React from 'react';
 import '../styles.scss';
 
+import Header from './header/Header';
+import Main from './Main';
+
 const App = () => {
     return (
       <div>
-        <h3>Our Application Is Alive</h3>
-        <p>This isn’t reality. This — is fantasy.</p>
-        <p>Yes I am quoting Star Trek I cant help it.</p>
+        <Header />
+        <Main />
       </div>
     );
 }
