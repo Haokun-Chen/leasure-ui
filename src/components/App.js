@@ -1,16 +1,23 @@
-import React from 'react';
+import React, {Component} from 'react';
+import 'react-dates/initialize';
 import '../styles.scss';
 
 import Header from './header/Header';
 import Main from './Main';
 
-const App = () => {
+class App extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
     return (
       <div>
         <Header />
         <Main />
       </div>
-    );
+    )
+  }
 }
 
 export default App;

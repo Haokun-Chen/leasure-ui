@@ -17,14 +17,41 @@ export default class AuthService{
             password
         }
         ).then(res => {
-            this.setToken(res.data.token) // Setting the token in localStorage
+            this.setToken(res.headers['x-auth-token']); // Setting the token in localStorage
             return Promise.resolve(res);
+        }).catch(res => {
+            return Promise.reject(res.response.data);
+        })
+    }
+    
+    signup(firstName, lastName, email, password, phone) {
+        return axios.post(`${this.domain}/user`, {
+            firstName,
+            lastName,
+            email,
+            password,
+            phone
+        }).then(res => {
+            this.setToken(res.headers['x-auth-token']);
+            return Promise.resolve(res);
+        }).catch(res => {
+            return Promise.reject(res.response.data);
         })
     }
 
     loggedIn() {
         // Checks if there is a saved token and it's still valid
-        const token = this.getToken() // GEtting token from localstorage
+        const token = this.getToken(); // Getting token from localstorage
+
+        // headers['Authorization'] = 'Bearer ' + this.getToken()
+
+        // axios.get(`${this.domain}/user/me`, {
+            
+        // }
+        // ).then(res => {
+        //     return 
+        // });
+
         return !!token && !this.isTokenExpired(token) // handwaiving here
     }
 
@@ -44,17 +71,17 @@ export default class AuthService{
 
     setToken(idToken) {
         // Saves user token to localStorage
-        localStorage.setItem('id_token', idToken);
+        localStorage.setItem('x-auth-token', idToken);
     }
 
     getToken() {
         // Retrieves the user token from localStorage
-        return localStorage.getItem('id_token');
+        return localStorage.getItem('x-auth-token');
     }
 
     logout() {
         // Clear user token and profile data from localStorage
-        localStorage.removeItem('id_token');
+        localStorage.removeItem('x-auth-token');
     }
 
     getProfile() {

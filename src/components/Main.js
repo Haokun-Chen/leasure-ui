@@ -4,6 +4,7 @@ import Landing from './landing/Landing';
 import Login from './login/Login';
 import Signup from './signup/Signup';
 import Listings from './listings/Listings';
+import Post from './post/Post';
 
 const Main = () => (
   <main>
@@ -12,6 +13,7 @@ const Main = () => (
       <Route path='/login' component={Login}/>
       <Route path='/signup' component={Signup}/>
       <Route path='/listings' component={Listings}/>
+      <Route path='/post' component={Post}/>
     </Switch>
   </main>
 )
